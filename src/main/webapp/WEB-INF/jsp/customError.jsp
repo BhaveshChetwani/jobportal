@@ -13,6 +13,6 @@
 
 </head>
 <body>
-<h3>${errorMsg }</h3>
+<h4 style="color:red">${errorMsg }</h4>
 </body>
 </html>
