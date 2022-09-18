@@ -1,23 +1,6 @@
-$( document ).ready(function() {
-    console.log( "ready!" );
-    
-    $('.addcandidate').click(function(){
-    	alert('Add Clicked');
-    });
-    
-    $('.searchcandidate').click(function(){
-    	alert('Search Clicked');
-    });
-});
-
-function addCandidate(){
-	document.getElementById('dashboardform').action = 'addcandidate';
-	document.getElementById('dashboardform').submit();
-}
-
 function validateUserName(username){
 	if(username.length <5){
-		displayError('#username_error','Username should be minimum five characters.');
+		displayError('#name_error','Username should be minimum five characters.');
 		return false;
 	}
 	if(username.length>4){
@@ -25,14 +8,25 @@ function validateUserName(username){
 		var op = callAjax('checkuserexists',params,false);
 		
 		if(op == 'true'){
-			displayError('#username_error','Username \''+username+'\' already exists. Please enter a differet username.')
+			displayError('#name_error','Username \''+username+'\' already exists. Please enter a differet username.')
 			return false;
 		}
 		
 	}
-	$('#username_error').hide();
+	$('#name_error').hide();
 	return true;
 	
+}
+
+function saveCandidate(){
+	document.getElementById('addcandidateform').action = 'savecandidate';
+	document.getElementById('addcandidateform').submit();
+}
+
+function logout(){
+alert('Im here');
+document.getElementById('addcandidateform').action = '';
+document.getElementById('addcandidateform').submit();
 }
 
 function validateEmailId(value){
@@ -63,5 +57,3 @@ function checkKeyCode(event){
 	return true;
 	//alert(event.keyCode);
 }
-
-//document.form[0].action = '';document.form[0].submit();

@@ -17,6 +17,17 @@
 
 </head>
 <body>
-
+<!-- <form id="logoutform" method="POST"> -->
+<div>
+<button style="align:right" align="right" class="btn btn-outline-danger" onclick="if(confirm('Are you sure you want to logout?')){logout();}">Logout</button>
+</div>
+<!-- </form> -->
 </body>
+<script type="text/javascript">
+/* function logout(){
+	alert('Im here');
+	document.getElementById('logoutform').action = '';
+	document.getElementById('logoutform').submit();
+} */
+</script>
 </html>

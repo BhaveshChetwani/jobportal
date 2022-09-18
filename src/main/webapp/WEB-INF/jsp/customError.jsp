@@ -8,6 +8,6 @@
 
 </head>
 <body>
-<h4 class="errormsg">${errorMsg }</h4>
+<h3 class="errormsg">${errorMsg }</h3>
 </body>
 </html>

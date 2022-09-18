@@ -13,13 +13,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="">
+	<form id="dashboardform" method="POST">
 		<h3>Welcome to Cubicle Consultancy, ${User.username }</h3>
-		
 		<table>
 		<tr>
 				<td>
-					<input type="Submit" class="btn btn-success addCandidate" value="Add Candidate" onclick="alert('Add clicked');"/>
+					<input type="Submit" class="btn btn-success addCandidate" value="Add Candidate" onclick="addCandidate();"/>
 				</td>
 			</tr>
 			<tr>

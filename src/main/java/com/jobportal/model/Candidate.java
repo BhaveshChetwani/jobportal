@@ -16,14 +16,11 @@ public class Candidate {
 	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "PASSWORD")
-	private String password;
-
 	@Column(name = "EMAILID")
 	private String emailId;
 
 	@Column(name = "MOBILENUMBER")
-	private int mobileNumber;
+	private Integer mobileNumber;
 
 	@Column(name = "TAGS")
 	private String tags;
@@ -42,14 +39,6 @@ public class Candidate {
 		Id = id;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getEmailId() {
 		return emailId;
 	}
@@ -58,11 +47,11 @@ public class Candidate {
 		this.emailId = emailId;
 	}
 
-	public int getMobileNumber() {
+	public Integer getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(int mobileNumber) {
+	public void setMobileNumber(Integer mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
@@ -108,9 +97,26 @@ public class Candidate {
 
 	@Override
 	public String toString() {
-		return "Candidate [Id=" + Id + ", name=" + name + ", password=" + password + ", emailId=" + emailId
+		return "Candidate [Id=" + Id + ", name=" + name + ", emailId=" + emailId
 				+ ", mobileNumber=" + mobileNumber + ", tags=" + tags + ", designation=" + designation + ", profile="
 				+ profile + "]";
 	}
-	
+
+	public boolean validateCandidate() {
+		if (designation == null || designation == "") {
+			return false;
+		}
+		if (emailId == null || emailId == "") {
+			return false;
+		}
+		if (name == null || name == "") {
+			return false;
+		}
+		if (profile == null || profile == "") {
+			return false;
+		}
+		
+		return true;
+	}
+
 }
