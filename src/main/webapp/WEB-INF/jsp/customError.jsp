@@ -4,15 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script src="/jobportal/js/common.js" type="text/javascript"></script>
-<script src="/jobportal/js/login.js" type="text/javascript"></script>
-<script src="/jobportal/js/jquery.3.51.min.js" type="text/javascript"></script>
-
-<link href="/jobportal/css/common.css" rel="stylesheet" type="text/css" >
 
 
 </head>
 <body>
-<h4 style="color:red">${errorMsg }</h4>
+<h4 class="errormsg">${errorMsg }</h4>
 </body>
 </html>

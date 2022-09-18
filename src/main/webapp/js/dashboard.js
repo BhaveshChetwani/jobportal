@@ -1,3 +1,15 @@
+$( document ).ready(function() {
+    console.log( "ready!" );
+    
+    $('.addcandidate').click(function(){
+    	alert('Add Clicked');
+    });
+    
+    $('.searchcandidate').click(function(){
+    	alert('Search Clicked');
+    });
+});
+
 function validateUserName(username){
 	if(username.length <5){
 		displayError('#username_error','Username should be minimum five characters.');
@@ -46,3 +58,5 @@ function checkKeyCode(event){
 	return true;
 	//alert(event.keyCode);
 }
+
+//document.form[0].action = '';document.form[0].submit();

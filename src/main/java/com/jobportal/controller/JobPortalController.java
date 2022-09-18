@@ -61,5 +61,11 @@ public class JobPortalController {
 		}
 		return "dashboard";
 	}
+	
+	@PostMapping("/addcandidate")
+	public String loadAddCandidate(ModelMap modelMap) {
+		
+		return "addcandidate";
+	}
 
 }

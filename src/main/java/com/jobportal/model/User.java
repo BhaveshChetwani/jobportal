@@ -12,20 +12,20 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
-	
-	@Column(name="USERNAME")
+
+	@Column(name = "USERNAME")
 	private String username;
-	
-	@Column(name="PASSWORD")
+
+	@Column(name = "PASSWORD")
 	private String password;
-	
-	@Column(name="EMAILID")
+
+	@Column(name = "EMAILID")
 	private String emailId;
-	
-	@Column(name="MOBILENUMBER")
+
+	@Column(name = "MOBILENUMBER")
 	private int mobileNumber;
-	
-	@Column(name="COUNTRYCODE")
+
+	@Column(name = "COUNTRYCODE")
 	private String countryCode;
 
 	public int getId() {
@@ -130,7 +130,7 @@ public class User {
 			return false;
 		return true;
 	}
-	
+
 	public boolean checkLogin(Object obj) {
 		if (this == obj)
 			return true;
@@ -151,7 +151,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }
