@@ -40,9 +40,26 @@ public class JobPortalController {
 
 	@PostMapping("/login")
 	public String loginSubmit(@ModelAttribute("User") User user, ModelMap modelMap) {
+		if(user==null) {
+			modelMap.addAttribute("user", user);
+			modelMap.addAttribute("errorMsg", "Invalid details");
+			return "login";
+		}
+		if(user!=null) {
+			if(user.getUsername()== null || user.getUsername()=="" || user.getPassword()==null || user.getPassword()=="") {
+				modelMap.addAttribute("user", user);
+				modelMap.addAttribute("errorMsg", "Invalid details");
+				return "login";
+			}
 		modelMap.addAttribute("User", user);
-		userService.saveUser(user);
-		return "welcome";
+		User userNew = userService.findUserByName(user);
+		if(userNew==null) {
+			modelMap.addAttribute("user", user);
+			modelMap.addAttribute("errorMsg", "User not found");
+			return "login";
+		}
+		}
+		return "dashboard";
 	}
 
 }

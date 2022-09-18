@@ -9,26 +9,10 @@
 <script src="/jobportal/js/jquery.3.51.min.js" type="text/javascript"></script>
 
 <link href="/jobportal/css/common.css" rel="stylesheet" type="text/css" >
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+
+
 </head>
 <body>
-	<form action="">
-		<h3>Welcome to Cubicle Consultancy, ${User.username }</h3>
-		
-		<table>
-		<tr>
-				<td>
-					<input type="Submit" class="btn btn-success addCandidate" value="Add Candidate" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="Submit" class="btn btn-success searchCandidate" value="Search Candidate"/>
-				</td>
-			</tr>
-		</table> 
-	</form>
+<h3>${errorMsg }</h3>
 </body>
 </html>

@@ -21,7 +21,7 @@ public class JobPortalRestController {
 	@ResponseBody
 	public String callDao(@RequestParam(name="username",required=true) String username) {
 		if(username!= null && username !="") {
-		List<User> userList = userService.findUserByName(username);
+		List<User> userList = userService.findUserByName1(username);
 			if(userList != null && !userList.isEmpty() && userList.size()>0) {
 				System.out.println(userList);
 				return "true";

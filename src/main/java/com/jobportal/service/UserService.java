@@ -21,7 +21,7 @@ public class UserService {
 		
 	}
 	
-	public List<User> findUserByName(String username) {
+	public List<User> findUserByName1(String username) {
 		Iterable<User> userList = userRepo.findAll();
 		List<User> userNew = new ArrayList<User>();
 		for(User user: userList) {
@@ -31,4 +31,16 @@ public class UserService {
 		}
 		return userNew;
 	}
+	
+	public User findUserByName(User user) {
+		Iterable<User> userList = userRepo.findAllActiveUsers(user.getUsername());
+		List<User> userNew = new ArrayList<User>();
+		for(User userTemp: userList) {
+			if(user.checkLogin(userTemp)) {
+				return userTemp;
+			}
+		}
+		return null;
+	}
+	
 }

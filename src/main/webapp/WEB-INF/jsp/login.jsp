@@ -13,6 +13,7 @@
 <title>Login</title>
 </head>
 <body>
+<%@ include file="customError.jsp" %>
 	<form action="login" method="post">
 		<table>
 			<tr>
