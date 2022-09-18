@@ -25,7 +25,7 @@ function saveCandidate(){
 
 function logout(){
 alert('Im here');
-document.getElementById('addcandidateform').action = '';
+document.getElementById('addcandidateform').action = 'prelogin';
 document.getElementById('addcandidateform').submit();
 }
 

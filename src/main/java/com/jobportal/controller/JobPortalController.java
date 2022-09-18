@@ -27,6 +27,13 @@ public class JobPortalController {
 		modelMap.addAttribute("User", user);
 		return "login";
 	}
+	
+	@RequestMapping("/prelogin")
+	public String logout(ModelMap modelMap) {
+		User user = new User();
+		modelMap.addAttribute("User", user);
+		return "login";
+	}
 
 	@RequestMapping("/register")
 	public String register(ModelMap modelMap) {

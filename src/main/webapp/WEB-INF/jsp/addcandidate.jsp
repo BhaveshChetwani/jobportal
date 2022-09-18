@@ -13,7 +13,7 @@
 </head>
 <body>
 <%@ include file="customError.jsp" %>
-	<form id="addcandidateform" method="post">
+	<form id="addcandidateform" method="POST">
 		<table>
 			<tr>
 				<td>Name: </td>
