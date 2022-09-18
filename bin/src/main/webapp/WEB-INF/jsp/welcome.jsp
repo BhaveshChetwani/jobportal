@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="">
-		<h3>Welcome to Cubicle Consultancy, ${User.username }</h3>
+		<h3>Welcome to Cubicle, ${User.username }</h3>
 	</form>
 </body>
 </html>
