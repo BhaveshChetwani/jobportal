@@ -35,7 +35,7 @@ public class JobPortalController {
 		System.out.println("user signup:"+user);
 		user = userService.saveUser(user);
 		modelMap.addAttribute("user", user);
-		return "welcome";
+		return "dashboard";
 	}
 
 	@PostMapping("/login")
