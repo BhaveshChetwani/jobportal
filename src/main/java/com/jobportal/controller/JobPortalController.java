@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jobportal.model.Candidate;
 import com.jobportal.model.User;
@@ -87,12 +88,22 @@ public class JobPortalController {
 		//Candidate candidate = new Candidate();
 		System.out.println("candidate:"+candidate);
 		if(candidate.validateCandidate()) {
-			
+			candidate = candidateService.saveCandidate(candidate);
+			System.out.println("candidate.getId():"+candidate.getId());
+			modelMap.addAttribute("candidate",candidate);
+			return "updatecandidate";
 		}else {
 			modelMap.addAttribute("errorMsg", "Please fill all details.");
 		}
 		modelMap.addAttribute("candidate", candidate);
 		return "addcandidate";
+	}
+	
+	@PostMapping("/uploaddocument")
+	public String uploadDocument(MultipartFile mp) {
+		//Candidate candidate = new Candidate();
+		System.out.println(mp);
+		return "updatecandidate";
 	}
 
 }
