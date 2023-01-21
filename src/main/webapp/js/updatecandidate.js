@@ -32,7 +32,9 @@ function saveCandidate(){
 function uploadDocument() {
 	let formData = new FormData();
 	var file = document.getElementById('mydoc').files[0];
+	var candidateId = document.getElementById('id').value;
 	formData.append("document", file);
+	formData.append("candidateId", candidateId);
 	var ajaxoutput = '';
 	var url = 'uploaddocument', params = '', async = true;
 	var op = callAjax(url, formData, async);

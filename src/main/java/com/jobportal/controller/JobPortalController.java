@@ -1,24 +1,24 @@
 package com.jobportal.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jobportal.model.Candidate;
+import com.jobportal.model.Document;
 import com.jobportal.model.User;
 import com.jobportal.service.CandidateService;
+import com.jobportal.service.DocumentService;
 import com.jobportal.service.UserService;
 
 @Controller
@@ -29,6 +29,9 @@ public class JobPortalController {
 
 	@Autowired
 	CandidateService candidateService;
+	
+	@Autowired
+	DocumentService documentService;
 
 	@RequestMapping("/")
 	public String login(ModelMap modelMap) {
@@ -108,13 +111,33 @@ public class JobPortalController {
 	}
 	
 	@PostMapping("/uploaddocument")
-	public String uploadDocument(@RequestParam("document") MultipartFile mp) {
-		//Candidate candidate = new Candidate();
+	public String uploadDocument(@RequestParam("document") MultipartFile mp,@RequestParam("candidateId") String candidateId) {
 		System.out.println(mp);
-		/*String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();*/
+		System.out.println(candidateId);
+		UUID uuid=UUID.randomUUID();
+		StringBuffer actualFileName = new StringBuffer(mp.getOriginalFilename());
+		StringBuffer filePath = new StringBuffer("E:\\work\\zdocs\\"+uuid+"\\"+actualFileName);
+		StringBuffer dirPath = new StringBuffer("E:\\work\\zdocs\\"+uuid);
+		File file = new File(dirPath.toString());
+		if(!file.exists()) {
+			file.mkdir();
+		}
+		File convFile = new File(filePath.toString());
+		
+        try {
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(mp.getBytes());
+            fos.close(); //IOUtils.closeQuietly(fos);
+            Document document = new Document();
+    		document.setCandidateId(candidateId);
+    		document.setDocumentName(actualFileName.toString());
+    		document.setUuid(uuid.toString());
+    		
+    		documentService.saveDocument(document);
+        } catch (IOException e) {
+            convFile = null;
+        }
 		return "updatecandidate";
 	}
 	

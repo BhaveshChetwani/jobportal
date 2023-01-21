@@ -15,10 +15,17 @@ public class Document {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	
+	@Column(name = "DOCUMENTUUID")
 	private String uuid;
 
-	private String uploadDir;
+	@Column(name = "DOCUMENTNAME")
+	private String documentName;
+	
+	//private String documentTypeId;
+	
+	@Column(name = "CANDIDATEID")
+	private String candidateId;
 
 	public int getId() {
 		return id;
@@ -37,11 +44,27 @@ public class Document {
 	}
 
 	public String getUploadDir() {
-		return uploadDir;
+		return documentName;
 	}
 
 	public void setUploadDir(String uploadDir) {
-		this.uploadDir = uploadDir;
+		this.documentName = uploadDir;
+	}
+
+	public String getDocumentName() {
+		return documentName;
+	}
+
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
+
+	public String getCandidateId() {
+		return candidateId;
+	}
+
+	public void setCandidateId(String candidateId) {
+		this.candidateId = candidateId;
 	}
 
 }
