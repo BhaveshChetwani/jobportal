@@ -102,6 +102,14 @@ public class JobPortalController {
 			candidate = candidateService.saveCandidate(candidate);
 			System.out.println("candidate.getId():"+candidate.getId());
 			modelMap.addAttribute("candidate",candidate);
+			
+			Document document = documentService.getDocumentByCandidateId(candidate.getId()+"");
+			if(document!=null && document.getUuid()!=null && document.getUuid()!="") {
+				modelMap.addAttribute("document",document);
+			}else {
+				modelMap.addAttribute("document",new Document());
+			}
+			
 			return "updatecandidate";
 		}else {
 			modelMap.addAttribute("errorMsg", "Please fill all details.");
@@ -161,5 +169,7 @@ public class JobPortalController {
         }*/
 		return "";
     }
+	
+	
 
 }

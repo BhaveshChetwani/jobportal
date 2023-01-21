@@ -12,7 +12,7 @@ function callAjax(url, params, async, callback){
 		processData: false,
 		contentType: false
 	}).done(function(data){
-		console.log("data:"+data);
+		//console.log("data:"+data);
 		ajaxoutput = data;
 		console.log("ajaxoutput:"+ajaxoutput);
 	});
