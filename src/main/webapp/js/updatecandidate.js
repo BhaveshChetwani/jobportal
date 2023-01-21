@@ -19,14 +19,30 @@ function validateUserName(username){
 }
 
 function saveCandidate(){
-	document.getElementById('updatecandidateform').action = 'savecandidate';
-	document.getElementById('updatecandidateform').submit();
+	//document.getElementById('updatecandidateform').action = 'savecandidate';
+	//document.getElementById('updatecandidateform').submit();
 }
 
-function uploadDocument(){
+/*function uploadDocument(){
 	var file = document.getElementById('mydoc').files[0]; 
 	document.getElementById('updatecandidateform').action = 'uploaddocument';
 	document.getElementById('updatecandidateform').submit();
+}*/
+
+function uploadDocument() {
+	let formData = new FormData();
+	var file = document.getElementById('mydoc').files[0];
+	formData.append("document", file);
+	var ajaxoutput = '';
+	var url = 'uploaddocument', params = '', async = true;
+	var op = callAjax(url, formData, async);
+
+	/*
+	 * $.ajax({ url : url, type : 'POST', data : formData, async : async, error:
+	 * function (ajaxContext) { alert(ajaxContext.responseText) }
+	 * }).done(function(data){ console.log("data:"+data); ajaxoutput = data;
+	 * console.log("ajaxoutput:"+ajaxoutput); });
+	 */
 }
 
 function logout(){

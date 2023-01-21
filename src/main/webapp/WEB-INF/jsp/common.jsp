@@ -6,13 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script src="/jobportal/js/common.js?reload=<%=reload %>" type="text/javascript"></script>
 <script src="/jobportal/js/jquery.3.51.min.js?reload=<%=reload %>" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js?reload=<%=reload %>"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js?reload=<%=reload %>"></script>
+<script src="/jobportal/js/common.js?reload=<%=reload %>" type="text/javascript"></script>
 
-<link href="/jobportal/css/common.css?reload=<%=reload %>" rel="stylesheet" type="text/css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css?reload=<%=reload %>">
+<link href="/jobportal/css/common.css?reload=<%=reload %>" rel="stylesheet" type="text/css" >
+
 
 
 </head>

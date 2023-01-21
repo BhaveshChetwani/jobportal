@@ -57,7 +57,8 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="Submit" class="btn btn-success" value="Upload Document" onclick="uploadDocument();"/>
+				<!-- <input type="Submit" class="btn btn-success" value="Upload Document" onclick="uploadDocument();"/> -->
+				<button class="btn btn-success"  onclick="uploadDocument();">Upload Document1</button>
 			</td>
 		</tr>
 		</table>

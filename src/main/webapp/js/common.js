@@ -9,6 +9,8 @@ function callAjax(url, params, async, callback){
 		type : 'POST',
 		data : params,
 		async : async,
+		processData: false,
+		contentType: false
 	}).done(function(data){
 		console.log("data:"+data);
 		ajaxoutput = data;
