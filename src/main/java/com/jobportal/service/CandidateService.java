@@ -1,5 +1,8 @@
 package com.jobportal.service;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,21 @@ public class CandidateService {
 	public Candidate saveCandidate(Candidate candidate) {
 		Candidate candidateNew = candidateRepo.save(candidate);
 		return candidateNew;
+
+	}
+	
+	public Candidate findCandidatebyId(int candidateId) {
+		Optional<Candidate> candidates = candidateRepo.findById(candidateId);
+		return candidates.get();
+
+	}
+	
+	public ArrayList<Candidate> searchCandidate(Candidate candidate) {
+		ArrayList<Candidate> candidates = new ArrayList(candidateRepo.findCandidatesByName(candidate.getName()));
+		for(Candidate cand : candidates) {
+			System.out.println(cand.getName());
+		}
+		return candidates;
 
 	}
 

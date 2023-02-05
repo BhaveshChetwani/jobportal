@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="Submit" class="btn btn-success searchCandidate" value="Search Candidate"/>
+					<input type="Submit" class="btn btn-success searchCandidate" value="Search Candidate" onclick="searchCandidate();"/>
 				</td>
 			</tr>
 		</table> 

@@ -3,6 +3,7 @@ package com.jobportal.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,27 @@ public class JobPortalController {
 		user = userService.saveUser(user);
 		modelMap.addAttribute("user", user);
 		return "dashboard";
+	}
+	
+	@RequestMapping("/searchcandidate")
+	public String search(@RequestParam(name="candidateId", required=false) String candidateId, @RequestParam(name="candidateName", required=false) String candidateName, @RequestParam(name="candidateEmail", required=false) String candidateEmail, ModelMap modelMap) {
+		System.out.println("candidateId:"+candidateId);
+		System.out.println("candidateName:"+candidateName);
+		System.out.println("candidateEmail:"+candidateEmail);
+		if(candidateId!=null && candidateId!="") {
+			int id = Integer.parseInt(candidateId);
+			Candidate candidate = candidateService.findCandidatebyId(id);
+			modelMap.addAttribute("candidate", candidate);
+			return "addcandidate";
+		}
+			modelMap.addAttribute("candidateName", candidateName);
+			modelMap.addAttribute("candidateEmail", candidateEmail);
+			Candidate candidate = new Candidate();
+			candidate.setName(candidateName);
+			ArrayList<Candidate> candidates = candidateService.searchCandidate(candidate);
+			modelMap.addAttribute("candidates", candidates);
+			return "searchcandidate";
+		
 	}
 
 	@PostMapping("/login")
@@ -149,27 +171,4 @@ public class JobPortalController {
 		return "updatecandidate";
 	}
 	
-	public String storeFile(MultipartFile file) {
-        // Normalize file name
-/*        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
-        try {
-            // Check if the file's name contains invalid characters
-            if(fileName.contains("..")) {
-                System.out.println("Sorry! Filename contains invalid path sequence " + fileName);
-            }
-
-            // Copy file to the target location (Replacing existing file with the same name)
-            //Path targetLocation = this.fileStorageLocation.resolve(fileName);
-            //Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-
-            return fileName;
-        } catch (IOException ex) {
-        	System.out.println("Could not store file " + fileName + ". Please try again!"+ex.getMessage());
-        }*/
-		return "";
-    }
-	
-	
-
 }

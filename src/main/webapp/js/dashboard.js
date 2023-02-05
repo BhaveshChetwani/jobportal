@@ -15,6 +15,11 @@ function addCandidate(){
 	document.getElementById('dashboardform').submit();
 }
 
+function searchCandidate(){
+	document.getElementById('dashboardform').action = 'searchcandidate';
+	document.getElementById('dashboardform').submit();
+}
+
 function validateUserName(username){
 	if(username.length <5){
 		displayError('#username_error','Username should be minimum five characters.');
