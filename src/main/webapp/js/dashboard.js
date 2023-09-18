@@ -20,6 +20,16 @@ function searchCandidate(){
 	document.getElementById('dashboardform').submit();
 }
 
+function addJobDescription(){
+	document.getElementById('dashboardform').action = 'addjobdescription';
+	document.getElementById('dashboardform').submit();
+}
+
+function searchJobDescription(){
+	document.getElementById('dashboardform').action = 'searchjobdescription';
+	document.getElementById('dashboardform').submit();
+}
+
 function validateUserName(username){
 	if(username.length <5){
 		displayError('#username_error','Username should be minimum five characters.');

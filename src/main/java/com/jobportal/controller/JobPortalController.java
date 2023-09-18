@@ -17,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jobportal.model.Candidate;
 import com.jobportal.model.Document;
+import com.jobportal.model.JobDescription;
 import com.jobportal.model.User;
 import com.jobportal.service.CandidateService;
 import com.jobportal.service.DocumentService;
+import com.jobportal.service.JobDescriptionService;
 import com.jobportal.service.UserService;
 
 @Controller
@@ -33,6 +35,9 @@ public class JobPortalController {
 	
 	@Autowired
 	DocumentService documentService;
+	
+	@Autowired
+	JobDescriptionService jobDescriptionService;
 
 	@RequestMapping("/")
 	public String login(ModelMap modelMap) {
@@ -169,6 +174,30 @@ public class JobPortalController {
             convFile = null;
         }
 		return "updatecandidate";
+	}
+	
+	@PostMapping("/addjobdescription")
+	public String loadAddJobDescription(ModelMap modelMap) {
+		JobDescription jobDescription = new JobDescription();
+		modelMap.addAttribute("jobDescription", jobDescription);
+		return "addjobdescription";
+	}
+	
+	@PostMapping("/savejobdescription")
+	public String saveJobDescription(@ModelAttribute("jobDescription") JobDescription jobDescription, ModelMap modelMap) {
+		//Candidate candidate = new Candidate();
+		System.out.println("candidate:"+jobDescription);
+		if(jobDescription.validateJobDescription()) {
+			jobDescription = jobDescriptionService.saveJobDescription(jobDescription);
+			System.out.println("candidate.getId():"+jobDescription.getId());
+			modelMap.addAttribute("candidate",jobDescription);
+			
+			return "dashboard";
+		}else {
+			modelMap.addAttribute("errorMsg", "Please fill all details.");
+		}
+		modelMap.addAttribute("jobDescription", jobDescription);
+		return "addjobdescription";
 	}
 	
 }

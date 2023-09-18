@@ -26,7 +26,21 @@
 					<input type="Submit" class="btn btn-success searchCandidate" value="Search Candidate" onclick="searchCandidate();"/>
 				</td>
 			</tr>
+		</table>
+		
+		<table>
+		<tr>
+				<td>
+					<input type="Submit" class="btn btn-success addJobDescription" value="Add Job Description" onclick="addJobDescription();"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="Submit" class="btn btn-success searchJobDescription" value="Search Job Description" onclick="searchJobDescription();"/>
+				</td>
+			</tr>
 		</table> 
+		 
 	</form>
 </body>
 </html>
