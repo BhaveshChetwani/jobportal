@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jobportal.model.Candidate;
+import com.jobportal.model.Clients;
 import com.jobportal.model.Document;
 import com.jobportal.model.JobDescription;
 import com.jobportal.model.User;
 import com.jobportal.service.CandidateService;
+import com.jobportal.service.ClientsService;
 import com.jobportal.service.DocumentService;
 import com.jobportal.service.JobDescriptionService;
 import com.jobportal.service.UserService;
@@ -38,6 +41,9 @@ public class JobPortalController {
 	
 	@Autowired
 	JobDescriptionService jobDescriptionService;
+	
+	@Autowired
+	ClientsService clientsService;
 
 	@RequestMapping("/")
 	public String login(ModelMap modelMap) {
@@ -69,7 +75,7 @@ public class JobPortalController {
 	}
 	
 	@RequestMapping("/searchcandidate")
-	public String search(@RequestParam(name="candidateId", required=false) String candidateId, @RequestParam(name="candidateName", required=false) String candidateName, @RequestParam(name="candidateEmail", required=false) String candidateEmail, ModelMap modelMap) {
+	public String searchCandidate(@RequestParam(name="candidateId", required=false) String candidateId, @RequestParam(name="candidateName", required=false) String candidateName, @RequestParam(name="candidateEmail", required=false) String candidateEmail, ModelMap modelMap) {
 		System.out.println("candidateId:"+candidateId);
 		System.out.println("candidateName:"+candidateName);
 		System.out.println("candidateEmail:"+candidateEmail);
@@ -86,6 +92,22 @@ public class JobPortalController {
 			ArrayList<Candidate> candidates = candidateService.searchCandidate(candidate);
 			modelMap.addAttribute("candidates", candidates);
 			return "searchcandidate";
+		
+	}
+	
+	@RequestMapping("/searchjobdescription")
+	public String searchJobDescription(@RequestParam(name="jobDescriptionName", required=false) String jobDescriptionName, @RequestParam(name="jobDescriptionLocation", required=false) String jobDescriptionLocation, ModelMap modelMap) {
+		
+		System.out.println("candidateName:"+jobDescriptionName);
+		System.out.println("candidateEmail:"+jobDescriptionLocation);
+		
+		modelMap.addAttribute("jobDescriptionName", jobDescriptionName);
+		modelMap.addAttribute("jobDescriptionLocation", jobDescriptionLocation);
+		JobDescription jobDescription = new JobDescription();
+		jobDescription.setName(jobDescriptionName);
+		ArrayList<JobDescription> jobDescriptions = jobDescriptionService.searchJobDescription(jobDescription);
+		modelMap.addAttribute("jobDescriptions", jobDescriptions);
+		return "searchjobdescription";
 		
 	}
 
@@ -180,6 +202,8 @@ public class JobPortalController {
 	public String loadAddJobDescription(ModelMap modelMap) {
 		JobDescription jobDescription = new JobDescription();
 		modelMap.addAttribute("jobDescription", jobDescription);
+		List<Clients> clientsList = clientsService.findAllClients();
+		modelMap.addAttribute("clientsList", clientsList);
 		return "addjobdescription";
 	}
 	

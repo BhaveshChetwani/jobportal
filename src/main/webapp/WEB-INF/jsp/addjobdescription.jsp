@@ -23,11 +23,36 @@
 			
 			
 			<tr>
-				<td>Designation: </td>
+				<td>Description: </td>
 				<td><input type="text" name="designation" id="description" value="${jobDescription.description }"  onkeyup="validateDescription(this.value);" /></td>
 				<td colspan="2"><p class="error" type="text" id="description_error" readonly maxlength ="100" ></p></td>
 			</tr>
 			
+			<tr>
+				<td>Client Name: </td>
+				<td><input type="hidden" name="clientId" id="clientId" value="${jobDescription.clientId }"  onkeyup="" />
+				<select id="clientDDId" value="${jobDescription.clientId }" onchange="document.getElementyId('clientId').value=document.getElementyId('clientDDId').value;">
+				<option value="" >-- Select a client Name --</option>
+				<c:forEach items="${clientsList}" var="clients">
+				<option value="${clients.id}" >${clients.name}</option>
+				</c:forEach>
+				</select>
+				</td>
+				
+				<td colspan="2"><p class="error" type="text" id="clientId_error" readonly maxlength ="100" ></p></td>
+			</tr>
+			
+			<tr>
+				<td>Location: </td>
+				<td><input type="text" name="location" id="location" value="${jobDescription.location }"  onkeyup="" /></td>
+				<td colspan="2"><p class="error" type="text" id="location_error" readonly maxlength ="100" ></p></td>
+			</tr>
+			
+			<tr>
+				<td>Tags: </td>
+				<td><input type="text" name="tags" id="tags" value="${jobDescription.tags }"  onkeyup="" /></td>
+				<td colspan="2"><p class="error" type="text" id="tags_error" readonly maxlength ="100" ></p></td>
+			</tr>
 
 			<tr>
 				<td>

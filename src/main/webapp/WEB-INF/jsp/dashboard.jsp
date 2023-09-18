@@ -15,6 +15,8 @@
 <body>
 	<form id="dashboardform" method="POST">
 		<h3>Welcome to Cubicle Consultancy, ${User.username }</h3>
+		
+		<div class="" id="">
 		<table>
 		<tr>
 				<td>
@@ -27,7 +29,9 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 		
+		<div class="" id="">
 		<table>
 		<tr>
 				<td>
@@ -40,7 +44,22 @@
 				</td>
 			</tr>
 		</table> 
-		 
+		</div>
+		
+		<div class="" id="">
+		<table>
+		<tr>
+				<td>
+					<input type="Submit" class="btn btn-success addClients" value="Add Clients" onclick="addClients();"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="Submit" class="btn btn-success searchClients" value="Search Clients" onclick="searchClients();"/>
+				</td>
+			</tr>
+		</table> 
+		</div>
 	</form>
 </body>
 </html>

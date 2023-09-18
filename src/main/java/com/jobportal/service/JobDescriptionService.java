@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jobportal.model.Candidate;
 import com.jobportal.model.JobDescription;
 import com.jobportal.repos.JobDescriptionRepo;
 
@@ -24,6 +25,16 @@ public class JobDescriptionService {
 	public JobDescription findJobDescriptionbyId(int jobDescriptionId) {
 		Optional<JobDescription> candidates = jobDescriptionRepo.findById(jobDescriptionId);
 		return candidates.get();
+
+	}
+	
+	public ArrayList<JobDescription> searchJobDescription(JobDescription jobDescriptionInput) {
+		System.out.println("jobDescriptionInput:"+jobDescriptionInput);
+		ArrayList<JobDescription> jobDescriptions = new ArrayList(jobDescriptionRepo.findJobDescriptionByName(jobDescriptionInput.getName()));
+		for(JobDescription jobDescription : jobDescriptions) {
+			System.out.println(jobDescription.getName());
+		}
+		return jobDescriptions;
 
 	}
 
