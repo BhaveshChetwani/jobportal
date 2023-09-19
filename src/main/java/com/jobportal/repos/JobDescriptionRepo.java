@@ -15,7 +15,7 @@ import com.jobportal.model.JobDescription;
 @Transactional
 public interface JobDescriptionRepo extends CrudRepository<JobDescription, Integer> {
 
-	@Query("FROM JobDescription j WHERE j.name LIKE '%:name%'")
+	@Query("FROM JobDescription j WHERE j.name LIKE :name")
 	Collection<JobDescription> findJobDescriptionByName(@Param("name") String name);
 	
 	@Query("FROM JobDescription j WHERE j.clientId =:clientId")

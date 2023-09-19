@@ -21,11 +21,9 @@
 <body>
 <!-- <form id="logoutform" method="POST"> -->
 <div>
-<button style="align:right" align="right" class="btn btn-outline-danger" onclick="if(confirm('Are you sure you want to logout?')){logout();}">Logout</button>
+<button style="align:right;display:flex;" align="right" class="btn btn-outline-danger" onclick="if(confirm('Are you sure you want to logout?')){logout();}">Logout</button>
 </div>
-<div>
-<button style="align:right" align="right" class="btn btn-outline-danger" onclick="if(confirm('Are you sure you want to logout?')){logout();}">Dashboard</button>
-</div>
+
 <!-- </form> -->
 </body>
 <script type="text/javascript">

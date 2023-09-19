@@ -4,6 +4,8 @@
 	display:none;
 	font-weight:bold;
 	color:red;
+	width:60%;
+	margn:10px;
 }
 
 .errormsg{

@@ -32,7 +32,7 @@ public class JobDescriptionService {
 		System.out.println("jobDescriptionInput:"+jobDescriptionInput);
 		ArrayList<JobDescription> jobDescriptions  =null;
 		if(jobDescriptionInput.getName()!=null && jobDescriptionInput.getName()!="") {
-			jobDescriptions = new ArrayList<JobDescription>(jobDescriptionRepo.findJobDescriptionByName(jobDescriptionInput.getName()));
+			jobDescriptions = new ArrayList<JobDescription>(jobDescriptionRepo.findJobDescriptionByName("%"+jobDescriptionInput.getName()+"%"));
 		}else if(jobDescriptionInput.getClientId()!=null && jobDescriptionInput.getClientId()!="") {
 			jobDescriptions = new ArrayList<JobDescription>(jobDescriptionRepo.findJobDescriptionByClientId(jobDescriptionInput.getClientId()));
 		}else {
