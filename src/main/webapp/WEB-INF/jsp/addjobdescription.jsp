@@ -31,7 +31,7 @@
 			<tr>
 				<td>Client Name: </td>
 				<td><input type="hidden" name="clientId" id="clientId" value="${jobDescription.clientId }"  onkeyup="" />
-				<select id="clientDDId" value="${jobDescription.clientId }" onchange="document.getElementyId('clientId').value=document.getElementyId('clientDDId').value;">
+				<select id="clientDDId" value="${jobDescription.clientId }" onchange="document.getElementById('clientId').value=document.getElementById('clientDDId').value;">
 				<option value="" >-- Select a client Name --</option>
 				<c:forEach items="${clientsList}" var="clients">
 				<option value="${clients.id}" >${clients.name}</option>

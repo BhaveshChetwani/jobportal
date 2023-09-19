@@ -13,7 +13,7 @@
 
 <title>Update</title>
 </head>
-<body>
+<body onload="searchjobdescriptiononload();">
 <%@ include file="customError.jsp" %>
 	<form id="searchjobdescriptionform" method="POST">
 <div class="d-flex row justify-content-center" style="display: flex;justify-content: left;">
@@ -33,8 +33,22 @@
 			</tr>
 			
 			<tr>
+				<td>Client Name: </td>
+				<td><input type="hidden" name="jobDescriptionClientId" id="jobDescriptionClientId" value="${jobDescriptionClientId }"  onkeyup="" />
+				<select id="clientDDId" value="" onchange="document.getElementById('jobDescriptionClientId').value=document.getElementById('clientDDId').value;">
+				<option value="" >-- Select a client Name --</option>
+				<c:forEach items="${clientsList}" var="clients">
+				<option value="${clients.id}" >${clients.name}</option>
+				</c:forEach>
+				</select>
+				</td>
+				
+				<td colspan="2"><p class="error" type="text" id="clientId_error" readonly maxlength ="100" ></p></td>
+			</tr>
+			
+			<tr>
 				<td>
-					<input type="Submit" class="btn btn-success" value="Search Candidate" onclick="searchJobDescription();"/>
+					<input type="Submit" class="btn btn-success" value="Search Job Descriptions" onclick="searchJobDescription();"/>
 				</td>
 			</tr>
 

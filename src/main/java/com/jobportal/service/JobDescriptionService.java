@@ -30,7 +30,18 @@ public class JobDescriptionService {
 	
 	public ArrayList<JobDescription> searchJobDescription(JobDescription jobDescriptionInput) {
 		System.out.println("jobDescriptionInput:"+jobDescriptionInput);
-		ArrayList<JobDescription> jobDescriptions = new ArrayList(jobDescriptionRepo.findJobDescriptionByName(jobDescriptionInput.getName()));
+		ArrayList<JobDescription> jobDescriptions  =null;
+		if(jobDescriptionInput.getName()!=null && jobDescriptionInput.getName()!="") {
+			jobDescriptions = new ArrayList<JobDescription>(jobDescriptionRepo.findJobDescriptionByName(jobDescriptionInput.getName()));
+		}else if(jobDescriptionInput.getClientId()!=null && jobDescriptionInput.getClientId()!="") {
+			jobDescriptions = new ArrayList<JobDescription>(jobDescriptionRepo.findJobDescriptionByClientId(jobDescriptionInput.getClientId()));
+		}else {
+			Iterable<JobDescription> itr = (jobDescriptionRepo.findAll());
+			jobDescriptions = new ArrayList<JobDescription>();
+			for(JobDescription jd : itr) {
+				jobDescriptions.add(jd);
+			}
+		}
 		for(JobDescription jobDescription : jobDescriptions) {
 			System.out.println(jobDescription.getName());
 		}

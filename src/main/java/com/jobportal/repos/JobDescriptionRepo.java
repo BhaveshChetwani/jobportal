@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.jobportal.model.JobDescription;
@@ -14,6 +15,9 @@ import com.jobportal.model.JobDescription;
 @Transactional
 public interface JobDescriptionRepo extends CrudRepository<JobDescription, Integer> {
 
-	@Query("SELECT j FROM JobDescription j WHERE j.name LIKE '%:name%'")
-	Collection<JobDescription> findJobDescriptionByName(String name);
+	@Query("FROM JobDescription j WHERE j.name LIKE '%:name%'")
+	Collection<JobDescription> findJobDescriptionByName(@Param("name") String name);
+	
+	@Query("FROM JobDescription j WHERE j.clientId =:clientId")
+	Collection<JobDescription> findJobDescriptionByClientId(@Param("clientId") String clientId);
 }

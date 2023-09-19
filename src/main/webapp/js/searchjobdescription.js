@@ -1,3 +1,6 @@
+function searchjobdescriptiononload(){
+	document.getElementById('clientDDId').value = document.getElementById('jobDescriptionClientId').value;
+}
 function validateUserName(username){
 	if(username.length <5){
 		displayError('#name_error','Username should be minimum five characters.');

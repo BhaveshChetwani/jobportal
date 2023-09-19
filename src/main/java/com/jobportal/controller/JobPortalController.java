@@ -96,15 +96,21 @@ public class JobPortalController {
 	}
 	
 	@RequestMapping("/searchjobdescription")
-	public String searchJobDescription(@RequestParam(name="jobDescriptionName", required=false) String jobDescriptionName, @RequestParam(name="jobDescriptionLocation", required=false) String jobDescriptionLocation, ModelMap modelMap) {
+	public String searchJobDescription(@RequestParam(name="jobDescriptionName", required=false) String jobDescriptionName, @RequestParam(name="jobDescriptionLocation", required=false) String jobDescriptionLocation, @RequestParam(name="jobDescriptionClientId", required=false) String jobDescriptionClientId, ModelMap modelMap) {
 		
-		System.out.println("candidateName:"+jobDescriptionName);
-		System.out.println("candidateEmail:"+jobDescriptionLocation);
+		System.out.println("jobDescriptionName:"+jobDescriptionName);
+		System.out.println("jobDescriptionLocation:"+jobDescriptionLocation);
+		System.out.println("jobDescriptionClientId:"+jobDescriptionClientId);
+		
+		List<Clients> clientsList = clientsService.findAllClients();
+		modelMap.addAttribute("clientsList", clientsList);
 		
 		modelMap.addAttribute("jobDescriptionName", jobDescriptionName);
 		modelMap.addAttribute("jobDescriptionLocation", jobDescriptionLocation);
+		modelMap.addAttribute("jobDescriptionClientId", jobDescriptionClientId);
 		JobDescription jobDescription = new JobDescription();
 		jobDescription.setName(jobDescriptionName);
+		jobDescription.setClientId(jobDescriptionClientId);
 		ArrayList<JobDescription> jobDescriptions = jobDescriptionService.searchJobDescription(jobDescription);
 		modelMap.addAttribute("jobDescriptions", jobDescriptions);
 		return "searchjobdescription";
