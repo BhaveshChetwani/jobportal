@@ -21,10 +21,12 @@ import com.jobportal.model.Clients;
 import com.jobportal.model.Document;
 import com.jobportal.model.JobDescription;
 import com.jobportal.model.User;
+import com.jobportal.model.UserRole;
 import com.jobportal.service.CandidateService;
 import com.jobportal.service.ClientsService;
 import com.jobportal.service.DocumentService;
 import com.jobportal.service.JobDescriptionService;
+import com.jobportal.service.UserRoleService;
 import com.jobportal.service.UserService;
 
 @Controller
@@ -32,6 +34,9 @@ public class JobPortalController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserRoleService userRoleService;
 
 	@Autowired
 	CandidateService candidateService;
@@ -138,7 +143,19 @@ public class JobPortalController {
 				modelMap.addAttribute("errorMsg", "User not found");
 				return "login";
 			}
+			
+			List<UserRole> userRoles = userRoleService.findAllUserRoles();
+			for(UserRole userRole : userRoles) {
+				if(userNew.getRoleId()!=null && userNew.getRoleId()!="" && Integer.parseInt(userNew.getRoleId()) == userRole.getRoleId()) {
+					userNew.setRoleName(userRole.getRoleName());
+					System.out.println(":"+userRole.getRoleName()+":");
+					break;
+				}
+			}
+			
+			modelMap.addAttribute("user", userNew);
 		}
+		
 		return "dashboard";
 	}
 

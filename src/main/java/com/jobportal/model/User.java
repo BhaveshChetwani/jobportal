@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class User {
@@ -27,6 +28,12 @@ public class User {
 
 	@Column(name = "COUNTRYCODE")
 	private String countryCode;
+	
+	@Column(name = "ROLEID")
+	private String roleId;
+	
+	@Transient
+	private String roleName;
 
 	public int getId() {
 		return Id;
@@ -150,6 +157,23 @@ public class User {
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
+
+	@Transient
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 }
