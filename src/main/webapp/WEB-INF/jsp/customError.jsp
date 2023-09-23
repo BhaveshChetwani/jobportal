@@ -9,5 +9,6 @@
 </head>
 <body>
 <h3 class="errormsg">${errorMsg }</h3>
+<h3 class="successmsg">${successMsg }</h3>
 </body>
 </html>

@@ -13,6 +13,11 @@
 	color:red;
 }
 
+.successmsg{
+	font-weight:bold;
+	color:green;
+}
+
 body{
 	margin:2%;
 }

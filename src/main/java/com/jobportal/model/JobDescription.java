@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="JOBDESCRIPTION")
@@ -23,6 +24,9 @@ public class JobDescription {
 	
 	@Column(name = "CLIENTID")
 	private String clientId;
+	
+	@Transient
+	private String clientName;
 
 	@Column(name = "LOCATION")
 	private String location;
@@ -83,6 +87,14 @@ public class JobDescription {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
 }

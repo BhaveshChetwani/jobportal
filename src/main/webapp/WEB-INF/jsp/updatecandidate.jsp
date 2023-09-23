@@ -16,7 +16,7 @@
 <%@ include file="customError.jsp" %>
 	<form id="updatecandidateform" method="POST">
 <div class="d-flex row justify-content-center" style="display: flex;justify-content: left;">
-<div class="d-inline-block col-6 pt-1">	
+<div class="d-inline-block col-3 pt-1">	
 	<input type="text" name="id" id="id" value="${candidate.id }" />
 		<table>
 			<tr>
@@ -84,6 +84,17 @@ response.getOutputStream().write(pdfByteArray);
 response.getOutputStream().flush();
 %> --%>
 		</div>
+		<div class="d-inline-block col-3 pt-4">
+			<table>
+				<c:forEach items="${history }" var="jh">
+					<tr>
+						<td>${jh.status }</td>
+						<td>${jh.updatedOn }</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+		
 		</div>
 	</form>
 </body>

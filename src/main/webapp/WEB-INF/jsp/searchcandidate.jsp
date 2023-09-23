@@ -19,7 +19,11 @@
 <div class="d-flex row justify-content-center" style="display: flex;justify-content: left;">
 <div class="d-inline-block col-6 pt-1">	
 
-<td><input type="text" name="candidateId" id="candidateId" value="${candidateId }" /></td>
+<td><input type="text" name="searchCandidateId" id="searchCandidateId" value="${searchCandidateId }" /></td>
+
+<td><input type="text" name="applyCandidateId" id="applyCandidateId" value="${applyCandidateId}" /></td>
+<td><input type="text" name="applyJobDescriptionId" id="applyJobDescriptionId" value="${applyJobDescriptionId}" /></td>
+
 
 		<table>
 			<tr>
@@ -47,8 +51,9 @@
 			<th>Designation</th>
 			<th>Contact</th>
 			<th>Profile</th>
-			<th></th>
-			<th></th>
+			<th>View</th>
+			<th>Jobs</th>
+			<th>Apply</th>
 		</tr>
 		<c:forEach items="${candidates}" var="cand">
 		<tr>
@@ -57,6 +62,13 @@
 			<td>${cand.mobileNumber }</td>
 			<td>${cand.profile }</td>
 			<td><input type="Submit" class="btn btn-success" value="Open Candidate" onclick="searchCandidate(${cand.id });"/></td>
+			<td><select id="jobApplication${cand.id}"><option value=""> -- Select a job -- </option>
+			<c:forEach items="${jobDescriptions }" var="jd">
+			<option value="${jd.id }_${jd.clientId }">${jd.clientName } - ${jd.name }</option>
+			</c:forEach>
+			</select>
+			</td>
+			<td><input type="Submit" class="btn btn-success" value="Apply" onclick="return applyJob(${cand.id });"/></td>
 		</tr>
 		</c:forEach>
 		</table>

@@ -19,13 +19,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jobportal.model.Candidate;
 import com.jobportal.model.Clients;
 import com.jobportal.model.Document;
+import com.jobportal.model.JobApplication;
 import com.jobportal.model.JobDescription;
+import com.jobportal.model.JobHistory;
 import com.jobportal.model.User;
 import com.jobportal.model.UserRole;
 import com.jobportal.service.CandidateService;
 import com.jobportal.service.ClientsService;
 import com.jobportal.service.DocumentService;
+import com.jobportal.service.JobApplicationService;
 import com.jobportal.service.JobDescriptionService;
+import com.jobportal.service.JobHistoryService;
 import com.jobportal.service.UserRoleService;
 import com.jobportal.service.UserService;
 
@@ -46,6 +50,12 @@ public class JobPortalController {
 	
 	@Autowired
 	JobDescriptionService jobDescriptionService;
+	
+	@Autowired
+	JobApplicationService jobApplicationService;
+	
+	@Autowired
+	JobHistoryService jobHistoryService;
 	
 	@Autowired
 	ClientsService clientsService;
@@ -80,15 +90,37 @@ public class JobPortalController {
 	}
 	
 	@RequestMapping("/searchcandidate")
-	public String searchCandidate(@RequestParam(name="candidateId", required=false) String candidateId, @RequestParam(name="candidateName", required=false) String candidateName, @RequestParam(name="candidateEmail", required=false) String candidateEmail, ModelMap modelMap) {
-		System.out.println("candidateId:"+candidateId);
-		System.out.println("candidateName:"+candidateName);
-		System.out.println("candidateEmail:"+candidateEmail);
-		if(candidateId!=null && candidateId!="") {
-			int id = Integer.parseInt(candidateId);
+	public String searchCandidate(@RequestParam(name="searchCandidateId", required=false) String searchCandidateId,
+			@RequestParam(name="applyCandidateId", required=false) String applyCandidateId, 
+			@RequestParam(name="applyJobDescriptionId", required=false) String applyJobDescriptionId,
+			@RequestParam(name="candidateName", required=false) String candidateName, 
+			@RequestParam(name="candidateEmail", required=false) String candidateEmail, 
+			ModelMap modelMap) {
+		System.out.println("candidateId:"+searchCandidateId);
+		System.out.println("applyCandidateId:"+applyCandidateId);
+		System.out.println("applyJobDescriptionId:"+applyJobDescriptionId);
+		if(searchCandidateId!=null && searchCandidateId!="") {
+			int id = Integer.parseInt(searchCandidateId);
 			Candidate candidate = candidateService.findCandidatebyId(id);
 			modelMap.addAttribute("candidate", candidate);
 			return "addcandidate";
+		}
+		
+		if(applyCandidateId!=null && applyCandidateId!="" && applyJobDescriptionId!=null && applyJobDescriptionId!="") {
+			String jobDescriptionId = applyJobDescriptionId.split("_")[0];
+			String clientId = applyJobDescriptionId.split("_")[1];
+			JobApplication jobApplication = new JobApplication();
+			jobApplication.setCandidateId(Integer.parseInt(applyCandidateId));
+			jobApplication.setJobDescriptionId(Integer.parseInt(jobDescriptionId));
+			jobApplication.setClientId(Integer.parseInt(clientId));
+			jobApplication.setState("P");
+			JobApplication ja = jobApplicationService.saveJobApplication(jobApplication);
+			if(ja.getMessage()!=null && ja.getMessage()!="") {
+				modelMap.addAttribute("successMsg", ja.getMessage());
+			}else {
+				modelMap.addAttribute("successMsg", "");
+			}
+			
 		}
 			modelMap.addAttribute("candidateName", candidateName);
 			modelMap.addAttribute("candidateEmail", candidateEmail);
@@ -96,6 +128,13 @@ public class JobPortalController {
 			candidate.setName(candidateName);
 			ArrayList<Candidate> candidates = candidateService.searchCandidate(candidate);
 			modelMap.addAttribute("candidates", candidates);
+			
+			JobDescription jobDescriptionInput = new JobDescription(); 
+			List<JobDescription> jobDescriptions = (ArrayList<JobDescription>)jobDescriptionService.searchJobDescription(jobDescriptionInput);
+			modelMap.addAttribute("applyCandidateId","");
+			modelMap.addAttribute("applyCandidateId","");
+			modelMap.addAttribute("jobDescriptions", jobDescriptions);
+			
 			return "searchcandidate";
 		
 	}
@@ -178,6 +217,8 @@ public class JobPortalController {
 			Document document = documentService.getDocumentByCandidateId(candidate.getId()+"");
 			if(document!=null && document.getUuid()!=null && document.getUuid()!="") {
 				modelMap.addAttribute("document",document);
+				List<JobHistory> history = jobHistoryService.findJobHistorybyId(candidate.getId());
+				modelMap.addAttribute("history", history);
 			}else {
 				modelMap.addAttribute("document",new Document());
 			}

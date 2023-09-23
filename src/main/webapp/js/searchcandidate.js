@@ -23,15 +23,31 @@ function saveCandidate(){
 	//document.getElementById('updatecandidateform').submit();
 }
 
-function searchCandidate(candidateId){
-	if(candidateId!=undefined && candidateId!=null){
-		alert('Candidate ID:'+candidateId);
-		document.getElementById('candidateId').value = candidateId;
+function searchCandidate(searchCandidateId){
+	if(searchCandidateId!=undefined && searchCandidateId!=null){
+		alert('Candidate ID:'+searchCandidateId);
+		document.getElementById('searchCandidateId').value = searchCandidateId;
 	}
 	document.getElementById('searchcandidateform').action = 'searchcandidate';
 	document.getElementById('searchcandidateform').submit();
 }
 
+function applyJob(candidateId){
+	let jdid = 'jobApplication'+candidateId;
+	let jdfield = document.getElementById(jdid);
+	if(jdfield!=null && jdfield.value!=null && jdfield.value!=""){
+		document.getElementById('applyJobDescriptionId').value = jdfield.value;
+		document.getElementById('applyCandidateId').value = candidateId;
+		document.getElementById('searchcandidateform').action = 'searchcandidate';
+		document.getElementById('searchcandidateform').submit();
+	}else{
+		alert('Select a Job before applying');
+		jdfield.focus();
+		return false;
+	}
+}
+
+/*
 function uploadDocument() {
 	let formData = new FormData();
 	var file = document.getElementById('mydoc').files[0];
@@ -43,6 +59,7 @@ function uploadDocument() {
 	var op = callAjax(url, formData, async);
 
 }
+*/
 
 function logout(){
 document.getElementById('searchcandidateform').action = 'prelogin';
