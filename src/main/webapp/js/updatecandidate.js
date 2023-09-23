@@ -19,8 +19,8 @@ function validateUserName(username){
 }
 
 function saveCandidate(){
-	//document.getElementById('updatecandidateform').action = 'savecandidate';
-	//document.getElementById('updatecandidateform').submit();
+	document.getElementById('updatecandidateform').action = 'savecandidate';
+	document.getElementById('updatecandidateform').submit();
 }
 
 /*function uploadDocument(){

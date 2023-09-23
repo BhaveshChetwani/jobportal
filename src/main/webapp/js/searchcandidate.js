@@ -18,18 +18,16 @@ function validateUserName(username){
 	
 }
 
-function saveCandidate(){
-	//document.getElementById('updatecandidateform').action = 'savecandidate';
-	//document.getElementById('updatecandidateform').submit();
-}
-
 function searchCandidate(searchCandidateId){
 	if(searchCandidateId!=undefined && searchCandidateId!=null){
 		alert('Candidate ID:'+searchCandidateId);
 		document.getElementById('searchCandidateId').value = searchCandidateId;
+		document.getElementById('searchcandidateform').action = 'loadcandidate';
+		document.getElementById('searchcandidateform').submit();
+	}else{
+		document.getElementById('searchcandidateform').action = 'searchcandidate';
+		document.getElementById('searchcandidateform').submit();
 	}
-	document.getElementById('searchcandidateform').action = 'searchcandidate';
-	document.getElementById('searchcandidateform').submit();
 }
 
 function applyJob(candidateId){

@@ -231,6 +231,32 @@ public class JobPortalController {
 		return "addcandidate";
 	}
 	
+	@PostMapping("/loadcandidate")
+	public String loadCandidate(@RequestParam(name="searchCandidateId", required=false) String candidateId, ModelMap modelMap) {
+		//Candidate candidate = new Candidate();
+		System.out.println("searchCandidateId:"+candidateId);
+		if(candidateId!=null && candidateId!="") {
+			Candidate candidate = candidateService.findCandidatebyId(Integer.parseInt(candidateId));
+			System.out.println("candidate.getId():"+candidate.getId());
+			modelMap.addAttribute("candidate",candidate);
+			
+			Document document = documentService.getDocumentByCandidateId(candidate.getId()+"");
+			if(document!=null && document.getUuid()!=null && document.getUuid()!="") {
+				modelMap.addAttribute("document",document);
+				List<JobHistory> history = jobHistoryService.findJobHistorybyId(candidate.getId());
+				modelMap.addAttribute("history", history);
+			}else {
+				modelMap.addAttribute("document",new Document());
+			}
+			
+			return "updatecandidate";
+		}else {
+			modelMap.addAttribute("errorMsg", "Please fill all details.");
+		}
+		modelMap.addAttribute("candidate", null);
+		return "searchcandidate";
+	}
+	
 	@PostMapping("/uploaddocument")
 	public String uploadDocument(@RequestParam("document") MultipartFile mp,@RequestParam("candidateId") String candidateId) {
 		System.out.println(mp);
