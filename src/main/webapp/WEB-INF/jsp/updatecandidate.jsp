@@ -106,23 +106,30 @@ response.getOutputStream().flush();
 				</table>
 
 				<div class="myContainer">
-					<div class="progress-container">
-						<div class="progress" id="progress"></div>
+					<div class="progress-container" style="display:flex;flex-direction:column;">
+						
 						<c:forEach items="${history }" var="jh" varStatus="historyIndex">
+						<div  style="display:flex;flex-direction:row;">
 							<c:choose>
 								<c:when test="${historyIndex.index eq 0 }">
-									<div class="circle active">${historyIndex.index+1}
-										${jh.status }</div>
+									<div class="circle active">${historyIndex.index+1}.&nbsp;</div>
+									<div class="postlinebox"></div>
+									<div class="verticaldiv">${jh.status }</div>
+									<div class="postemptyline verticaldiv"></div>
+									<div class="verticaldiv">${jh.updatedOn }</div>
+									
 								</c:when>
 								<c:otherwise>
-									<div class="postlinebox">
-										<div class="postline"></div>
-									</div>
-									<div class="circle active">${historyIndex.index}
-										${jh.status }</div>
+									<div class="circle active">${historyIndex.index+1}.&nbsp;</div>
+									<div class="postlinebox"></div>
+										<div class="verticaldiv">${jh.status }</div>
+										<div class="postblueline verticaldiv"></div>
+										<div class="verticaldiv">${jh.updatedOn }</div>
+									
+									
 								</c:otherwise>
 							</c:choose>
-
+</div>
 						</c:forEach>
 
 					</div>
